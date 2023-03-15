@@ -1,7 +1,9 @@
 import processor
 import view
+import variable
 
-
+print()
+print(f'{variable.start_prog}\n {60 * "_"}')
 def start():
 
     while True:
@@ -19,6 +21,7 @@ def start():
             case 5:
                 processor.delete_contact()
             case 6:
-                print("Пока")
+                # Если пользователь вводит 6, то цикл останавливается и программа завершается
+                print(variable.exit)
                 break
                 
