@@ -15,6 +15,7 @@ def open_file():
             new = line.strip().split(';')
             new_contact = {}
             new_contact['name'] = new[0]
+            new_contact['surname'] = new[0]
             new_contact['phone'] = new[1]
             new_contact['comment'] = new[2]
             phone_book.append(new_contact)
@@ -22,10 +23,8 @@ def open_file():
         #     for i in range (len(line)):
         #         if data[i] == ';':
         #             dictionary = {'name': data[:i]}
-    print(*new_phone_book)
 
-open_file()
-exit()
+
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
     if not file:
