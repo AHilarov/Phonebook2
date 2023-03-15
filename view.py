@@ -13,6 +13,15 @@ def print_menu():
     7. Удалить контакт
     8. Выход
     ''')
+    while True:
+        try:
+            user_input = int(input())
+            if 0 < user_input < 9:
+                return user_input
+            else:
+                print(variable.error)
+        except:
+            print(variable.error)
 
 # print_msg(msg): функция для вывода сообщения на экран пользователя
 def print_msg(msg):

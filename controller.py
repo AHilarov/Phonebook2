@@ -5,7 +5,7 @@ import view
 
 def start():
     while True:
-        choice = view.menu()
+        choice = view.print_menu()
         match choice:
             case 1:
                 processor.open_file()
