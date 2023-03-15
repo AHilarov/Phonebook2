@@ -1,6 +1,6 @@
 import processor
-import view
 
+import view
 
 
 def start():
