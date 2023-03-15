@@ -1,11 +1,10 @@
 import processor
-
 import view
 
 
 def start():
-    while True:
-        choice = view.menu()
+    # while True:
+        choice = view.print_menu()
         match choice:
             case 1:
                 processor.open_file()
@@ -23,5 +22,5 @@ def start():
             case 7:
                 processor.delete_contact()
             case 8:
-                pass
-                break
+                processor.finish_file()
+                

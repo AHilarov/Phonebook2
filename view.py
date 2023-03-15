@@ -1,4 +1,4 @@
-from tabulate import tabulate
+# from tabulate import tabulate
 import variable
 # интефейс взаимодействия с пользователем
 # print_menu(): функция для вывода меню на экран пользователя
@@ -22,4 +22,4 @@ def print_msg(msg):
 
 # print_phonebook(): функция для вывода справочника
 def print_phonebook(arr):
-    print(tabulate(arr, headers=variable.first_line))
+    print(arr, headers=variable.first_line)
