@@ -1,5 +1,8 @@
 import processor
 
+import view
+
+
 def start():
     while True:
         choice = view.menu()

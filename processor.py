@@ -4,6 +4,7 @@ phone_book = []
 new_phone_book = []
 path = 'phonebook.txt'
 
+
 def open_file():
     global phone_book
     global new_phone_book
@@ -19,10 +20,8 @@ def open_file():
             new_contact['comment'] = new[3]
             phone_book.append(new_contact)
     new_phone_book = deepcopy(phone_book)
-        #     for i in range (len(line)):
-        #         if data[i] == ';':
-        #             dictionary = {'name': data[:i]}
-    print(*new_phone_book)
+
+
 
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
