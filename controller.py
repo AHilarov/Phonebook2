@@ -8,20 +8,17 @@ def start():
 
         choice = view.print_menu()
         match choice:
-            case 1:
-                processor.open_file()
-            case 2:
-                processor.save_file()
-            case 3:                
+            case 1:                
                 view.print_phonebook(processor.open_file())
-            case 4:
+            case 2:
                 processor.new_contact()
-            case 5:
+            case 3:
                 processor.change_contact()
-            case 6:
+            case 4:
                 processor.find_contact()                
-            case 7:
+            case 5:
                 processor.delete_contact()
-            case 8:
-                processor.finish_file()
+            case 6:
+                print("Пока")
+                break
                 
