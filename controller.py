@@ -13,14 +13,13 @@ def start():
             case 2:
                 processor.save_file()
             case 3:                
-                view.show_contacts(processor.get_contacts())
+                view.print_phonebook(processor.open_file())
             case 4:
-                processor.new_contact(processor.get_contacts())
+                processor.new_contact()
             case 5:
                 processor.change_contact()
             case 6:
-                processor.find_contact()
-                
+                processor.find_contact()                
             case 7:
                 processor.delete_contact()
             case 8:

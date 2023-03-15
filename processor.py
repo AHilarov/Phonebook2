@@ -1,4 +1,5 @@
 from copy import deepcopy
+import variable
 
 phone_book = []
 new_phone_book = []
@@ -20,6 +21,7 @@ def open_file():
             new_contact['comment'] = new[3]
             phone_book.append(new_contact)
     new_phone_book = deepcopy(phone_book)
+    return new_phone_book
 
 
 
@@ -30,22 +32,21 @@ def save_file():
     with open(path, 'w') as data:
         data.writelines(' '.join(map(str, )))
         data.write('\n')
-    
-def get_contacts():
-    get = open(path, 'r')
-    data = get.read()
-    print("Вот все записи справочника: ", end=' ')
-    print(data)
-        
+            
 def new_contact():
-    name = input('Введите имя нового пользователя: ')
-    surname = input('Введите фамилию нового пользователя: ')
-    number = input('Введите телефон нового пользователя: ')
-    comment = input('Введите комментарий нового пользователя: ')
-    new_contact = {'name': name, 'surname': surname, 'number': number, 'comment': comment}
-    return new_contact
+    global phone_book
+    a = input('Введите имя нового пользователя: ')
+    b = input('Введите фамилию нового пользователя: ')
+    c = input('Введите телефон нового пользователя: ')
+    d = input('Введите комментарий нового пользователя: ')
+    new_contact = f'{a};{b};{c};{d}'
+    with open(path, 'a', encoding='UTF-8') as data:
+        data.writelines('\n')    
+        data.writelines(new_contact)
+    print(variable.added_contact)
+  
 
-def find_file():
+def find_contact():
     with open ('phonebook.txt', 'r') as data:
         contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
         lines = data.readlines()
@@ -58,9 +59,9 @@ def find_file():
                 break
         if found == False:
             print("Контакта с такой фамилией нет")
-    pass
+    
 
-def change_file():
+def change_contact():
     fin = open('phonebook.txt', 'r')
     data = fin.read()
     print("Вот все записи справочника: ", end=' ')
@@ -72,9 +73,9 @@ def change_file():
     fin = open('phonebook.txt', 'w')
     fin.write(data)
     fin.close
-    pass
+    
 
-def delete_file():
+def delete_contact():
     f = open('phonebook.txt', 'r')
     lines = f.readlines()
     f.close()
@@ -84,7 +85,7 @@ def delete_file():
         if line != line_del:
             f.write(line)
     f.close()
-    pass
+    
 
 def finish_file():
     quit()
