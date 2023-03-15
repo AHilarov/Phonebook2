@@ -3,7 +3,9 @@ import view
 
 
 def start():
-    # while True:
+
+    while True:
+
         choice = view.print_menu()
         match choice:
             case 1:
