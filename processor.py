@@ -15,38 +15,40 @@ def open_file():
             new = line.strip().split(';')
             new_contact = {}
             new_contact['name'] = new[0]
-            new_contact['surname'] = new[0]
-            new_contact['phone'] = new[1]
-            new_contact['comment'] = new[2]
+            new_contact['surname'] = new[1]
+            new_contact['phone'] = new[2]
+            new_contact['comment'] = new[3]
             phone_book.append(new_contact)
     new_phone_book = deepcopy(phone_book)
-        #     for i in range (len(line)):
-        #         if data[i] == ';':
-        #             dictionary = {'name': data[:i]}
+
 
 
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
     if not file:
-        file = 'phonebook'
-    with open('phonebook.txt', 'w') as data:
+        file = path
+    with open(path, 'w') as data:
         data.writelines(' '.join(map(str, )))
         data.write('\n')
     
-
-
 def get_contacts():
-    pass
-
-def new_contact(dictionary, name, surname, number, comment):
-    pass
-
+    get = open(path, 'r')
+    data = get.read()
+    print("Вот все записи справочника: ", end=' ')
+    print(data)
+        
+def new_contact():
+    name = input('Введите имя нового пользователя: ')
+    surname = input('Введите фамилию нового пользователя: ')
+    number = input('Введите телефон нового пользователя: ')
+    comment = input('Введите комментарий нового пользователя: ')
+    new_contact = {'name': name, 'surname': surname, 'number': number, 'comment': comment}
+    return new_contact
 
 def find_file():
     with open ('phonebook.txt', 'r') as data:
         contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
         lines = data.readlines()
-
         found = False
         for line in lines:
             if contact in line:
