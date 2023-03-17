@@ -1,24 +1,92 @@
+from copy import deepcopy
+import variable
+
+phone_book = []
+new_phone_book = []
+path = 'phonebook.txt'
+
+
 def open_file():
-    dictionary = {}
-    with open ('phonebook.txt', 'r') as data:
+    global phone_book
+    global new_phone_book
+    global path
+    with open (path, 'r', encoding='UTF-8') as file:
+        data = file.readlines()
         for line in data:
-            for i in range (len(line)):
-                if data[i] == ';':
-                    dictionary = {'name': data[:i]}
+            new = line.strip().split(';')
+            new_contact = {}
+            new_contact['name'] = new[0]
+            new_contact['surname'] = new[1]
+            new_contact['phone'] = new[2]
+            new_contact['comment'] = new[3]
+            phone_book.append(new_contact)
+    new_phone_book = deepcopy(phone_book)
+    return new_phone_book
+
+
 
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
     if not file:
-        file = 'phonebook'
-    with open('phonebook.txt', 'w') as data:
+        file = path
+    with open(path, 'w') as data:
         data.writelines(' '.join(map(str, )))
         data.write('\n')
+            
+def new_contact():
+    global phone_book
+    a = input('Введите имя нового пользователя: ')
+    b = input('Введите фамилию нового пользователя: ')
+    c = input('Введите телефон нового пользователя: ')
+    d = input('Введите комментарий нового пользователя: ')
+    new_contact = f'{a};{b};{c};{d}'
+    with open(path, 'a', encoding='UTF-8') as data:
+        data.writelines('\n')    
+        data.writelines(new_contact)
+    print(variable.added_contact)
+  
+
+def find_contact():
+    with open ('phonebook.txt', 'r') as data:
+        contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
+        lines = data.readlines()
+        found = False
+        for line in lines:
+            if contact in line:
+                print("Вот контакт, который Вы искали: ", end=' ')
+                print(line)
+                found = True
+                break
+        if found == False:
+            print("Контакта с такой фамилией нет")
     
 
+def change_contact():
+    fin = open('phonebook.txt', 'r')
+    data = fin.read()
+    print("Вот все записи справочника: ", end=' ')
+    print(data)
+    text_1 = str(input("Введите запись, которую Вы хотете заменить: ", end=' '))
+    text_2 = str(input("На что вы хотите заменить: ", end=' '))
+    data = data.replace(text_1, text_2)
+    fin.close()
+    fin = open('phonebook.txt', 'w')
+    fin.write(data)
+    fin.close
+    
 
-def get_contacts():
-    pass
+def delete_contact():
+    f = open('phonebook.txt', 'r')
+    lines = f.readlines()
+    f.close()
+    f = open('phonebook.txt', 'w')
+    line_del = int(input("Введите номер строки для удаления: "))
+    for line in lines:
+        if line != line_del:
+            f.write(line)
+    f.close()
+    
 
-def new_contact(dictionary, name, surname, number, comment):
-    pass
+def finish_file():
+    quit()
 
