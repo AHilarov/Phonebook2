@@ -1,29 +1,35 @@
 from copy import deepcopy
 import variable
 
-phone_book = []
-new_phone_book = []
 path = 'phonebook.txt'
 
+def check_file():
+    with open (path, 'a', encoding='UTF-8') as file:
+        return ' '
 
 def open_file():
-    phone_book
-    new_phone_book
-    path
+    phone_book = []
+    new_phone_book = []
+    count = 0
     with open (path, 'r', encoding='UTF-8') as file:
         data = file.readlines()
         for line in data:
+            count += 1
             new = line.strip().split(';')
             new_contact = {}
+            new_contact['id'] = count
             new_contact['name'] = new[0]
             new_contact['surname'] = new[1]
             new_contact['phone'] = new[2]
             new_contact['comment'] = new[3]
             phone_book.append(new_contact)
     new_phone_book = deepcopy(phone_book)
-    return new_phone_book
-
-
+    if count > 1:
+        return new_phone_book
+    else:
+        print(variable.empty_dir)
+        return ' '
+          
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
     if not file:

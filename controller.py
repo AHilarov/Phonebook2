@@ -10,7 +10,8 @@ def start():
     while True:
         choice = view.print_menu()
         match choice:
-            case 1:                
+            case 1: 
+                processor.check_file()
                 view.print_phonebook(processor.open_file())
             case 2:
                 processor.new_contact()
@@ -21,7 +22,6 @@ def start():
             case 5:
                 print(variable.delete_contacts)
                 view.print_phonebook(processor.find_contact())
-                
                 processor.delete_contact()
             case 6:
                 print("Пока")
