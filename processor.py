@@ -45,57 +45,66 @@ def new_contact():
     print(variable.added_contact)
   
 
-def find_contact():
-    global phone_book
-    print (phone_book)
-    # print(f'''\nКак будем искать?
-    # 1. Показать контакты
-    # 2. Создать контакт
-    # 3. Изменить контакт
-    # 4. Найти контакт
-    # 5. Удалить контакт
-    # 6. Выход
-    # \n{variable.menu_selection}''', end='')
-    # with open ('phonebook.txt', 'r') as data:
-    #     contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
-    #     lines = data.readlines()
-    #     found = False
-    #     for line in lines:
-    #         if contact in line:
-    #             print("Вот контакт, который Вы искали: ", end=' ')
-    #             print(line)
-    #             found = True
-    #             break
-    #     if found == False:
-    #         print("Контакта с такой фамилией нет")
+def find_contact() -> list:
+    with open (r'phonebook.txt', 'r', encoding="utf8") as file:
+        data = file.readlines()
+        contact = input(variable.find_contacts)
+        line_target = -1
+        for line in data:
+            if contact in line:
+                print(contact, "существует в справочнике." )
+                line_target = line
+                print("Полная запись контакта: ", line)
+        if line_target == -1:
+            print(variable.no_contact)
+    
+# Первая версия - без задания изменяемой строки
+# def change_contact():
+#     with open(r'phonebook.txt', 'r', encoding="utf8") as file:
+#         data = file.read()
+#         print("Вот все записи справочника: \n")
+#         print(data, "\n")
+#         search_text = input("Введите запись, которую Вы хотете заменить: ")
+#         replace_text = input("На что вы хотите заменить: ")
+#         data = data.replace(search_text, replace_text)
+#     with open(r'phonebook.txt', 'w', encoding="utf8") as file:
+#         file.write(data)
+#     print("Изменения внесены.")
     
 
+# Вторая версия - с заданием изменяемой строки
 def change_contact():
-    fin = open('phonebook.txt', 'r')
-    data = fin.read()
-    print("Вот все записи справочника: ", end=' ')
-    print(data)
-    text_1 = str(input("Введите запись, которую Вы хотете заменить: ", end=' '))
-    text_2 = str(input("На что вы хотите заменить: ", end=' '))
-    data = data.replace(text_1, text_2)
-    fin.close()
-    fin = open('phonebook.txt', 'w')
-    fin.write(data)
-    fin.close
-    
+    with open(r'phonebook.txt', 'r', encoding="utf8") as file:
+        data = file.readlines()
+        print("Вот все записи справочника: \n")
+        for i, line in enumerate(data, 1):
+            print(f'{i} : {line}')
+        data = ''.join(str(x) for x in data)
+        target_line = input("Введите номер строки, в которую Вы хотете внести изменения: ")
+        search_text = input("Введите запись, которую Вы хотете заменить: ")
+        replace_text = input("На что вы хотите заменить: ")
+        for line in data:
+            if line == target_line:
+                data = data.replace(search_text, replace_text)
+    with open(r'phonebook.txt', 'w', encoding="utf8") as file:
+        file.write(data)
+    print("Изменения внесены.")
 
 def delete_contact():
-    f = open('phonebook.txt', 'r')
-    lines = f.readlines()
-    f.close()
-    f = open('phonebook.txt', 'w')
-    line_del = int(input("Введите номер строки для удаления: "))
-    for line in lines:
-        if line != line_del:
-            f.write(line)
-    f.close()
+    with open(r'phonebook.txt', 'r', encoding="utf8") as file:
+        data = file.readlines()
+        contact = input(variable.delete_contacts).lower()
+        line_del = -1
+        for line in data:
+            if contact in line:
+                print(contact, "существует в справочнике. Запись будет удалена." )
+                line_del = line
+        if line_del == -1:
+            print("Такого контакта нет. Справочник не будет изменен.")
+    with open(r'phonebook.txt', 'w', encoding="utf8") as file:
+        for line in data:
+            if line != line_del:
+                file.write(line)
+        data = ''.join(str(x) for x in data)
     
-
-def finish_file():
-    quit()
 
