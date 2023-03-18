@@ -7,9 +7,9 @@ path = 'phonebook.txt'
 
 
 def open_file():
-    global phone_book
-    global new_phone_book
-    global path
+    phone_book
+    new_phone_book
+    path
     with open (path, 'r', encoding='UTF-8') as file:
         data = file.readlines()
         for line in data:
