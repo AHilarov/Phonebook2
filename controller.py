@@ -1,11 +1,12 @@
 import processor
 import view
+import sys, os
+clear = lambda: os.system('cls')
 
 
 def start():
-
+    clear ()
     while True:
-
         choice = view.print_menu()
         match choice:
             case 1:                
