@@ -24,7 +24,6 @@ def open_file():
     return new_phone_book
 
 
-
 def save_file():
     file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
     if not file:
@@ -35,11 +34,11 @@ def save_file():
             
 def new_contact():
     global phone_book
-    a = input('Введите имя нового пользователя: ')
-    b = input('Введите фамилию нового пользователя: ')
-    c = input('Введите телефон нового пользователя: ')
-    d = input('Введите комментарий нового пользователя: ')
-    new_contact = f'{a};{b};{c};{d}'
+    name = input('Введите имя нового пользователя: ')
+    surname = input('Введите фамилию нового пользователя: ')
+    phone = input('Введите телефон нового пользователя: ')
+    comment = input('Введите комментарий нового пользователя: ')
+    new_contact = f'{name};{surname};{phone};{comment}'
     with open(path, 'a', encoding='UTF-8') as data:
         data.writelines('\n')    
         data.writelines(new_contact)
@@ -47,18 +46,28 @@ def new_contact():
   
 
 def find_contact():
-    with open ('phonebook.txt', 'r') as data:
-        contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
-        lines = data.readlines()
-        found = False
-        for line in lines:
-            if contact in line:
-                print("Вот контакт, который Вы искали: ", end=' ')
-                print(line)
-                found = True
-                break
-        if found == False:
-            print("Контакта с такой фамилией нет")
+    global phone_book
+    print (phone_book)
+    # print(f'''\nКак будем искать?
+    # 1. Показать контакты
+    # 2. Создать контакт
+    # 3. Изменить контакт
+    # 4. Найти контакт
+    # 5. Удалить контакт
+    # 6. Выход
+    # \n{variable.menu_selection}''', end='')
+    # with open ('phonebook.txt', 'r') as data:
+    #     contact = input('Пожалуйста, задайте фамилию адресата для поиска: ')
+    #     lines = data.readlines()
+    #     found = False
+    #     for line in lines:
+    #         if contact in line:
+    #             print("Вот контакт, который Вы искали: ", end=' ')
+    #             print(line)
+    #             found = True
+    #             break
+    #     if found == False:
+    #         print("Контакта с такой фамилией нет")
     
 
 def change_contact():
