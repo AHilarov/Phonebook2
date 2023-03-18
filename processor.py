@@ -45,10 +45,10 @@ def new_contact():
     print(variable.added_contact)
   
 
-def find_contact():
+def find_contact() -> list:
     with open (r'phonebook.txt', 'r', encoding="utf8") as file:
         data = file.readlines()
-        contact = input("Задайте имя или фамилию контакта для поиска: ")
+        contact = input(variable.find_contacts)
         line_target = -1
         for line in data:
             if contact in line:
@@ -56,8 +56,8 @@ def find_contact():
                 line_target = line
                 print("Полная запись контакта: ", line)
         if line_target == -1:
-            print("Такого контакта нет.")
-
+            print(variable.no_contact)
+    
 # Первая версия - без задания изменяемой строки
 # def change_contact():
 #     with open(r'phonebook.txt', 'r', encoding="utf8") as file:
@@ -93,7 +93,7 @@ def change_contact():
 def delete_contact():
     with open(r'phonebook.txt', 'r', encoding="utf8") as file:
         data = file.readlines()
-        contact = input("Задайте имя или фамилию контакта для удаления: ")
+        contact = input(variable.delete_contacts).lower()
         line_del = -1
         for line in data:
             if contact in line:
