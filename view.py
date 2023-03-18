@@ -1,16 +1,18 @@
-# from tabulate import tabulate
+from tabulate import tabulate
 import variable
-# интефейс взаимодействия с пользователем
-# print_menu(): функция для вывода меню на экран пользователя
+import sys, os
+clear = lambda: os.system('cls')
+
+
 def print_menu():
-    print('''\nГлавное меню:
+    print(f'''\nГлавное меню:
     1. Показать контакты
     2. Создать контакт
     3. Изменить контакт
     4. Найти контакт
     5. Удалить контакт
     6. Выход
-    ''')
+    \n{variable.menu_selection}''', end='')
     while True:
         try:
             user_input = int(input())
@@ -29,4 +31,5 @@ def print_msg(msg):
 
 # print_phonebook(): функция для вывода справочника
 def print_phonebook(arr):
-    print(arr)
+    clear ()
+    print(tabulate(arr, headers=variable.first_line))
