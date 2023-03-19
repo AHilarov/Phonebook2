@@ -31,4 +31,5 @@ def print_msg(msg):
 
 # print_phonebook(): функция для вывода справочника
 def print_phonebook(arr):
+    clear()
     print(tabulate(arr, headers=variable.first_line))

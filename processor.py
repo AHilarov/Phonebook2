@@ -6,7 +6,7 @@ path = 'phonebook.txt'
 def check_file():
     with open (path, 'a', encoding='UTF-8') as file:
         return ' '
-
+    
 def open_file():
     phone_book = []
     new_phone_book = []
@@ -24,22 +24,15 @@ def open_file():
             new_contact['comment'] = new[3]
             phone_book.append(new_contact)
     new_phone_book = deepcopy(phone_book)
-    if count > 1:
+    if count >= 1:
         return new_phone_book
     else:
         print(variable.empty_dir)
         return ' '
-          
-def save_file():
-    file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
-    if not file:
-        file = path
-    with open(path, 'w') as data:
-        data.writelines(' '.join(map(str, )))
-        data.write('\n')
-            
+   
+      
 def new_contact():
-    global phone_book
+    phone_book = []
     name = input('Введите имя нового пользователя: ')
     surname = input('Введите фамилию нового пользователя: ')
     phone = input('Введите телефон нового пользователя: ')
@@ -49,8 +42,7 @@ def new_contact():
         data.writelines('\n')    
         data.writelines(new_contact)
     print(variable.added_contact)
-  
-
+      
 def find_contact() -> list:
     with open (r'phonebook.txt', 'r', encoding="utf8") as file:
         data = file.readlines()
