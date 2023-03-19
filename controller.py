@@ -11,7 +11,7 @@ def start():
         choice = view.print_menu()
         match choice:
             case 1: 
-                # processor.check_file()
+                processor.check_file()
                 processor.check_empty_lines()
                 view.print_phonebook(processor.open_file())
             case 2:
