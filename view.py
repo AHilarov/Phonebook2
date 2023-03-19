@@ -32,4 +32,5 @@ def print_menu():
 # print_phonebook(): функция для вывода справочника
 def print_phonebook(arr):
     clear()
+    print('\n', variable.open_book)
     print(tabulate(arr, headers=variable.first_line))

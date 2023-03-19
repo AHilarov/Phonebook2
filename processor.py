@@ -3,9 +3,10 @@ import variable
 
 path = 'phonebook.txt'
 
-def check_file():
-    with open (path, 'a', encoding='UTF-8'):
-        return ' '
+# def check_file():
+#     with open (path, 'a', encoding='UTF-8') as file:
+#         file.write(';;;')
+#         return
 
 def open_file():
     phone_book = []
@@ -126,3 +127,15 @@ def delete_contact():
             if line != line_del:
                 file.write(line)
         file.truncate()
+
+
+def check_empty_lines():
+    with open (path, 'r+', encoding='UTF-8') as file:
+        data = file.readlines()   
+        new_data = []
+        for line in data:
+            if len(line)>1:
+                new_data.append(line)
+    with open (path, 'w', encoding='UTF-8') as file:    
+        for i in new_data:
+             file.writelines(i)
