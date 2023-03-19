@@ -4,7 +4,7 @@ import variable
 path = 'phonebook.txt'
 
 def check_file():
-    with open (path, 'a', encoding='UTF-8') as file:
+    with open (path, 'a', encoding='UTF-8'):
         return ' '
 
 def open_file():
@@ -45,18 +45,27 @@ def new_contact():
   
 
 def find_contact():
+    contact = input(variable.find_contacts)
+    contacts_found = []
+    line_target = -1
+    count = 0
     with open (path, 'r', encoding="utf8") as file:
         data = file.readlines()
-        contact = input(variable.find_contacts)
-        contacts_found = []
-        line_target = -1
         for line in data:
             if contact in line:
                 line_target = line
-                contacts_found.append(line)     
+                count += 1
+                search_res = line.strip().split(';')
+                new_contact = {}
+                new_contact['id'] = count
+                new_contact['name'] = search_res[0]
+                new_contact['surname'] = search_res[1]
+                new_contact['phone'] = search_res[2]
+                new_contact['comment'] = search_res[3]
+                contacts_found.append(new_contact)     
         if line_target == -1:
             print(variable.no_contact)
-    print(*contacts_found)
+    return contacts_found
 
 
 def change_contact():

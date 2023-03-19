@@ -8,8 +8,8 @@ def print_menu():
     print(f'''\nГлавное меню:
     1. Показать контакты
     2. Создать контакт
-    3. Изменить контакт
-    4. Найти контакт
+    3. Найти контакт
+    4. Изменить контакт
     5. Удалить контакт
     6. Выход
     \n{variable.menu_selection}''', end='')
@@ -24,10 +24,10 @@ def print_menu():
             print(variable.error)
 
 # print_msg(msg): функция для вывода сообщения на экран пользователя
-def print_msg(msg):
-    print(50 * "_")
-    print(msg)
-    print(50 * "_")
+# def print_msg(msg):
+#     print(50 * "_")
+#     print(msg)
+#     print(50 * "_")
 
 # print_phonebook(): функция для вывода справочника
 def print_phonebook(arr):
