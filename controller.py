@@ -18,10 +18,9 @@ def start():
             case 3:
                 processor.change_contact()
             case 4:
-                view.print_phonebook(processor.find_contact())          
+                processor.find_contact()        
             case 5:
                 print(variable.delete_contacts)
-                view.print_phonebook(processor.find_contact())
                 processor.delete_contact()
             case 6:
                 print("Пока")

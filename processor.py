@@ -30,14 +30,7 @@ def open_file():
         print(variable.empty_dir)
         return ' '
           
-def save_file():
-    file = input('Имя файла для сохранения (enter - имя файла для сохранения)')
-    if not file:
-        file = path
-    with open(path, 'w') as data:
-        data.writelines(' '.join(map(str, )))
-        data.write('\n')
-            
+         
 def new_contact():
     global phone_book
     name = input('Введите имя нового пользователя: ')
@@ -51,66 +44,76 @@ def new_contact():
     print(variable.added_contact)
   
 
-def find_contact() -> list:
-    with open (r'phonebook.txt', 'r', encoding="utf8") as file:
+def find_contact():
+    with open (path, 'r', encoding="utf8") as file:
         data = file.readlines()
         contact = input(variable.find_contacts)
+        contacts_found = []
         line_target = -1
         for line in data:
             if contact in line:
-                print(contact, "существует в справочнике." )
                 line_target = line
-                print("Полная запись контакта: ", line)
+                contacts_found.append(line)     
         if line_target == -1:
             print(variable.no_contact)
-    
-# Первая версия - без задания изменяемой строки
-# def change_contact():
-#     with open(r'phonebook.txt', 'r', encoding="utf8") as file:
-#         data = file.read()
-#         print("Вот все записи справочника: \n")
-#         print(data, "\n")
-#         search_text = input("Введите запись, которую Вы хотете заменить: ")
-#         replace_text = input("На что вы хотите заменить: ")
-#         data = data.replace(search_text, replace_text)
-#     with open(r'phonebook.txt', 'w', encoding="utf8") as file:
-#         file.write(data)
-#     print("Изменения внесены.")
-    
+    print(*contacts_found)
 
-# Вторая версия - с заданием изменяемой строки
+
 def change_contact():
-    with open(r'phonebook.txt', 'r', encoding="utf8") as file:
+    with open(path, 'r+', encoding="utf8") as file:
         data = file.readlines()
-        print("Вот все записи справочника: \n")
-        for i, line in enumerate(data, 1):
-            print(f'{i} : {line}')
-        data = ''.join(str(x) for x in data)
-        target_line = input("Введите номер строки, в которую Вы хотете внести изменения: ")
-        search_text = input("Введите запись, которую Вы хотете заменить: ")
-        replace_text = input("На что вы хотите заменить: ")
-        for line in data:
-            if line == target_line:
-                data = data.replace(search_text, replace_text)
-    with open(r'phonebook.txt', 'w', encoding="utf8") as file:
-        file.write(data)
-    print("Изменения внесены.")
-
-def delete_contact():
-    with open(r'phonebook.txt', 'r', encoding="utf8") as file:
-        data = file.readlines()
-        contact = input(variable.delete_contacts).lower()
-        line_del = -1
+        contact = input(variable.find_contacts)
+        contacts_found = []
+        line_target = -1
         for line in data:
             if contact in line:
-                print(contact, "существует в справочнике. Запись будет удалена." )
-                line_del = line
-        if line_del == -1:
-            print("Такого контакта нет. Справочник не будет изменен.")
-    with open(r'phonebook.txt', 'w', encoding="utf8") as file:
+                line_target = line
+                contacts_found.append(line)
+        if line_target != -1:
+            if len(contacts_found) > 1:
+                print(variable.confirm_contacts)
+                for i, line in enumerate(contacts_found, 1):
+                    print(f'{i} : {line}')
+                id_del = int(input(variable.change_contacts))
+                line_change = contacts_found[id_del - 1]
+            else:   
+                line_change = line_target
+                for i, line in enumerate(contacts_found, 1):
+                    print(f'{i} : {line}')
+            replace_data = input(variable.replace_data)
+            file.seek(0)
+            for line in data:
+                if line == line_change:
+                    file.write(f'{replace_data}\n')
+                else:
+                    file.write(line)
+            print(variable.confirm_change)
+        else:
+            print(variable.no_contact)
+
+
+def delete_contact():
+    with open (path, 'r+', encoding="utf8") as file:
+        data = file.readlines()
+        contact = input(variable.find_contacts)
+        contacts_found = []
+        line_target = -1
+        for line in data:
+            if contact in line:
+                line_target = line
+                contacts_found.append(line)
+        if line_target == -1:
+            print(variable.no_contact)
+        if len(contacts_found) > 1:
+            print(variable.confirm_contacts)
+            for i, line in enumerate(contacts_found, 1):
+                print(f'{i} : {line}')
+            id_del = int(input(variable.delete_contacts))
+            line_del = contacts_found[id_del - 1]
+        else:   
+            line_del = line_target
+        file.seek(0)
         for line in data:
             if line != line_del:
                 file.write(line)
-        data = ''.join(str(x) for x in data)
-    
-
+        file.truncate()
