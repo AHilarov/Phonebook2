@@ -3,10 +3,9 @@ import variable
 
 path = 'phonebook.txt'
 
-# def check_file():
-#     with open (path, 'a', encoding='UTF-8') as file:
-#         file.write(';;;')
-#         return
+def check_file():
+    with open (path, 'a', encoding='UTF-8'):
+        return
 
 def open_file():
     phone_book = []
@@ -90,7 +89,13 @@ def change_contact():
                 line_change = line_target
                 for i, line in enumerate(contacts_found, 1):
                     print(f'{i} : {line}')
-            replace_data = input(variable.replace_data)
+            # replace_data = input(variable.replace_data)
+            print(variable.replace_data)
+            name = input('Скорректируйте имя: ')
+            surname = input('Скорректируйте фамилию: ')
+            phone = input('Скорректируйте телефон: ')
+            comment = input('Скорректируйте комментарий: ')
+            replace_data = f'{name};{surname};{phone};{comment}'
             file.seek(0)
             for line in data:
                 if line == line_change:
