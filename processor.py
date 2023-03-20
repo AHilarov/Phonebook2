@@ -4,8 +4,8 @@ import variable
 path = 'phonebook.txt'
 
 def check_file():
-    with open (path, 'a', encoding='UTF-8') as file:
-        return ' '
+    with open (path, 'a', encoding='UTF-8'):
+        return
 
 def open_file():
     phone_book = []
@@ -45,18 +45,27 @@ def new_contact():
   
 
 def find_contact():
+    contact = input(variable.find_contacts)
+    contacts_found = []
+    line_target = -1
+    count = 0
     with open (path, 'r', encoding="utf8") as file:
         data = file.readlines()
-        contact = input(variable.find_contacts)
-        contacts_found = []
-        line_target = -1
         for line in data:
             if contact in line:
                 line_target = line
-                contacts_found.append(line)     
+                count += 1
+                search_res = line.strip().split(';')
+                new_contact = {}
+                new_contact['id'] = count
+                new_contact['name'] = search_res[0]
+                new_contact['surname'] = search_res[1]
+                new_contact['phone'] = search_res[2]
+                new_contact['comment'] = search_res[3]
+                contacts_found.append(new_contact)     
         if line_target == -1:
             print(variable.no_contact)
-    print(*contacts_found)
+    return contacts_found
 
 
 def change_contact():
@@ -80,7 +89,13 @@ def change_contact():
                 line_change = line_target
                 for i, line in enumerate(contacts_found, 1):
                     print(f'{i} : {line}')
-            replace_data = input(variable.replace_data)
+            # replace_data = input(variable.replace_data)
+            print(variable.replace_data)
+            name = input('Скорректируйте имя: ')
+            surname = input('Скорректируйте фамилию: ')
+            phone = input('Скорректируйте телефон: ')
+            comment = input('Скорректируйте комментарий: ')
+            replace_data = f'{name};{surname};{phone};{comment}'
             file.seek(0)
             for line in data:
                 if line == line_change:
@@ -117,3 +132,15 @@ def delete_contact():
             if line != line_del:
                 file.write(line)
         file.truncate()
+
+
+def check_empty_lines():
+    with open (path, 'r+', encoding='UTF-8') as file:
+        data = file.readlines()   
+        new_data = []
+        for line in data:
+            if len(line)>1:
+                new_data.append(line)
+    with open (path, 'w', encoding='UTF-8') as file:    
+        for i in new_data:
+             file.writelines(i)

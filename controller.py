@@ -12,13 +12,16 @@ def start():
         match choice:
             case 1: 
                 processor.check_file()
+                processor.check_empty_lines()
                 view.print_phonebook(processor.open_file())
             case 2:
                 processor.new_contact()
+                processor.check_empty_lines()
             case 3:
-                processor.change_contact()
+                view.print_phonebook(processor.find_contact())
             case 4:
-                processor.find_contact()        
+                processor.change_contact()
+                # processor.check_empty_lines()
             case 5:
                 print(variable.delete_contacts)
                 processor.delete_contact()
